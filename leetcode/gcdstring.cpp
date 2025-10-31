@@ -1,3 +1,5 @@
+#include <string>     // for std::string
+using namespace std;
 class Solution {
 public:
     string gcdOfStrings(string str1, string str2) {

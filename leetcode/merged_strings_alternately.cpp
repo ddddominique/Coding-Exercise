@@ -1,4 +1,7 @@
-#include <string>
+ // for cout, cin
+#include <string>     // for std::string
+using namespace std;
+
 class Solution {
 public:
     string mergeAlternately(string word1, string word2) {
