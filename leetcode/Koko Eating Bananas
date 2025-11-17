@@ -1,0 +1,28 @@
+class Solution {
+    bool validate(vector<int>& piles, int h, int k) {
+        int result = 0;
+
+        for (int pile : piles) {
+            result += (pile + k - 1) / k;
+        }
+        return result <= h;
+    }
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int mymax = *max_element(piles.begin(), piles.end());
+
+        int l = 1, r = mymax;
+
+        while (l < r) {
+            int mid = l + (r - l) / 2;
+            if (validate(piles, h, mid)) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+
+
+        }
+        return l;
+    }
+};
