@@ -1,19 +1,20 @@
- // for cout, cin
-#include <string>     // for std::string
-using namespace std;
-
 class Solution {
 public:
     string mergeAlternately(string word1, string word2) {
         string result;
-        int i = 0;
-        int j = 0;
-        while (i < word1.size() && j < word2.size()) {
-            result += word1[i++];
-            result += word2[j++];
+        int len1 = word1.size();
+        int len2 = word2.size();
+        int small = min(len1, len2);
+        for (int i = 0; i < small; ++i) {
+            result.push_back(word1[i]);
+            result.push_back(word2[i]);
         }
-        if (i < word1.size()) {result += word1.substr(i);}
-        if (j < word2.size()) {result += word2.substr(j);}
+        if (len1 == small) {
+            result += word2.substr(small);
+        } 
+        if (len2 == small) {
+            result += word1.substr(small);
+        }
         return result;
     }
 };
