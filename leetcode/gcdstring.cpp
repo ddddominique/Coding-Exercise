@@ -1,12 +1,8 @@
-#include <string>     // for std::string
-using namespace std;
 class Solution {
 public:
     string gcdOfStrings(string str1, string str2) {
-        if (str1 + str2 != str2 + str1) {
-            return "";
-        }
-        int gcdlen = gcd(str1.size(), str2.size());
-        return str1.substr(0, gcdlen);
+        if (str1 + str2 != str2 + str1) {return "";}
+        int mygcd = gcd(str1.size(), str2.size());
+        return str1.substr(0, mygcd);
     }
 };
