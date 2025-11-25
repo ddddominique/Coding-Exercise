@@ -36,3 +36,26 @@ public:
         return result;
     }
 };
+
+class Solution {
+public:
+    int maxOperations(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int left = 0;
+        int right = nums.size() - 1;
+        int result = 0;
+        while (left < right) {
+            int ans = nums[left] + nums[right];
+            if (ans == k) {
+                result++;
+                left++;
+                right--;
+            } else if (ans < k) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return result;
+    }
+};
