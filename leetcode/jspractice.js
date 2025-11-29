@@ -81,3 +81,28 @@ function countChars(str){
 }
 
 console.log(countChars("Peggy Porth"));
+
+function removeDupesFromArray(arr){
+    let result = [];
+    for (let i = 0; i < arr.length; ++i) {
+        if (!result.includes(arr[i])) {
+            result.push(arr[i]);
+        } else {
+            continue;
+        }
+    }
+    return result;
+}
+
+function flatten(arr) {
+    let result = [];
+    
+    for (let myarry of arr) {
+        if (Array.isArray(myarry)) {
+            result.push(...flatten(myarry))
+        } else {
+            result.push(myarry)
+        }
+    }
+    return result;
+}
