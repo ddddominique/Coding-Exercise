@@ -114,3 +114,81 @@ function sumArray(arr){
     }
     return sum;
 }
+function findTheWinner(obj){
+    let winner = "";
+    let max_vote = 0;
+    
+    for (const [key, vote] of Object.entries(gameNightFood)) {
+        if (vote > max_vote) {
+            max_vote = vote;
+            winner = key;
+        }
+    }
+    return `The winner is ${winner} with ${max_vote} votes!`
+}
+
+function getFreePodcasts(data){
+   let result = [];
+   for (const i of data) {
+    if (!i.paid) {
+        result.push({
+            title: i.title,
+            rating: i.rating,
+            paid: false
+        });
+    }
+   }
+   return result;
+}
+
+function getFreePodcasts(data){
+   return data.filter(hold => !hold.paid).map(pod => (
+    {title: pod.title, 
+    rating: pod.rating, 
+    paid: false}
+   ))
+}
+function total(arr){
+    let result = arr.reduce((acc, curr) => (curr.price + acc), 0)
+    return result.toFixed(2);
+}
+
+function totalSavory(arr){
+    return arr.reduce(function(acc, curr) {
+        if (curr.type === "savory") {
+            acc += curr.price;
+        }
+        return acc;
+    }, 0)
+}
+
+function sortProducts(data){
+    data.sort(function(a, b) {
+        return a.price - b.price;
+    })
+    
+    for (const o of data) {
+        console.log(o.product + "," + o.price);
+    }
+    return data;
+}
+
+
+function getUniqueTags(data){
+    let result = [];
+    for (const o of data) {
+        for (const tag of o.tags) {
+            if (!result.includes(tag)) {
+                result.push(tag);
+            }
+        }
+    }
+    return result;
+}
+
+
+function calcAverageLikes(data){
+
+  let result = data.reduce((acc, curr) => acc + curr.likes, 0);
+  return result / data.length;
+} 
