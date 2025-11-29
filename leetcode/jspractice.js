@@ -192,3 +192,28 @@ function calcAverageLikes(data){
   let result = data.reduce((acc, curr) => acc + curr.likes, 0);
   return result / data.length;
 } 
+
+const awards = ["🏆", "⭐", "💎", "🥇", "👑"];
+
+function getHosts(data){
+
+   return data.reduce(function (acc, curr) {
+        acc.push(curr.hosts);
+        return acc.flat();
+   }, [])
+
+}
+
+function assignAwards(data){
+    const mydata = getHosts(data);
+    let result = [];
+    for (const d of mydata) {
+        const i = Math.floor(Math.random() * awards.length)
+        result.push(awards[i] + ` ${d}`);
+    }
+    return result;
+}
+
+
+console.log(getHosts(podcasts));
+console.log(assignAwards(podcasts));
