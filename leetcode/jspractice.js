@@ -106,3 +106,11 @@ function flatten(arr) {
     }
     return result;
 }
+
+function sumArray(arr){
+    let sum = 0;
+    for (let i of arr) {
+        sum += i;
+    }
+    return sum;
+}
