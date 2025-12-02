@@ -18,3 +18,19 @@ public:
         return max_avg;
     }
 };
+class Solution {
+public:
+    double findMaxAverage(vector<int>& nums, int k) {
+        double result = 0;
+        for (int i = 0; i < k; ++i) {
+            result += nums[i];
+        }
+        
+        double window_sum = result;
+        for (int i = k; i < nums.size(); ++i) {
+            window_sum = window_sum - nums[i - k] + nums[i];
+            result = max(window_sum, result);
+        }
+        return result / k;
+    }
+};
