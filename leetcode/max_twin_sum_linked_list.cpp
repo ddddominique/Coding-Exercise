@@ -9,49 +9,33 @@
  * };
  */
 class Solution {
-    ListNode* reverseList(ListNode* head) {
-        ListNode* curr = head;
-        ListNode* prev = nullptr;
-        while ( curr != nullptr) {
-            ListNode* nextNode = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = nextNode;
-        }
-        return prev;
-    }
-
-        int get_length(ListNode* head) {
-        int result = 0;
-        ListNode* curr = head;
-        while (curr != nullptr) {
-            result++;
-            curr = curr->next;
-        }
-        return result;
-    }
-
 public:
     int pairSum(ListNode* head) {
-        int count = 0;
-        int middle = get_length(head) / 2 - 1;
-        ListNode* curr = head;
-        while(count <= middle) {
-            curr = curr->next;
-            count++;
+        ListNode* fast = head;
+        ListNode* slow = head;
+        while (fast && slow) {
+            slow = slow->next;
+            fast = fast->next->next;
         }
 
-        ListNode* other_end = reverseList(curr);
-        int result = 0;
-        while (other_end) {
-            int temp = head->val;
-            temp += other_end->val;
-            other_end = other_end->next;
-            head  = head->next;
-            result = max(temp, result);
+        ListNode* prev = nullptr;
+        ListNode* curr = slow;
+        while (curr) {
+            ListNode* next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
         }
 
-        return result;
-
+        int mymax = 0;
+        while (prev) {
+            int twin = 0;
+            twin += head->val + prev->val;
+            head = head->next;
+            prev = prev->next;
+            mymax = max(twin, mymax);
+        }
+        return mymax;
+        
     }
 };
