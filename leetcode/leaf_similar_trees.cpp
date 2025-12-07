@@ -10,20 +10,21 @@
  * };
  */
 class Solution {
-    void myleaves(TreeNode* root, vector<int>& leaf) {
+    void myleaf(TreeNode* root, vector<int>& leaves) {
         if (!root) return;
         if (!root->left && !root->right) {
-            leaf.push_back(root->val);
+            leaves.push_back(root->val);
         }
-        myleaves(root->left, leaf);
-        myleaves(root->right, leaf);
-
+        myleaf(root->left, leaves);
+        myleaf(root->right, leaves);
     }
 public:
     bool leafSimilar(TreeNode* root1, TreeNode* root2) {
-        vector<int> leaves_1, leaves_2;
-        myleaves(root1, leaves_1);
-        myleaves(root2, leaves_2);
-        return leaves_1 == leaves_2;
+        vector<int> leaves1;
+        vector<int> leaves2;
+
+        myleaf(root1, leaves1);
+        myleaf(root2, leaves2);
+        return leaves1 == leaves2;
     }
 };
