@@ -9,10 +9,10 @@
  * };
  */
 class Solution {
-    int get_length(ListNode* head) {
+    int getLength(ListNode* head) {
         int result = 0;
         ListNode* curr = head;
-        while (curr != nullptr) {
+        while (curr) {
             result++;
             curr = curr->next;
         }
@@ -20,20 +20,18 @@ class Solution {
     }
 public:
     ListNode* deleteMiddle(ListNode* head) {
-        if (get_length(head) == 1) return nullptr;
-
-        int middle = get_length(head) / 2 ;
-        int count = 0;
+        int n = getLength(head);
+        if (n == 1) {return nullptr;}
         ListNode* curr = head;
-
-        while (curr != nullptr) {
-            if (count == middle - 1) {
-                curr->next = curr->next->next;
-                break;
-            } 
-            count++;
+        int count = 0;
+        while (count < (n / 2) - 1) {
             curr = curr->next;
+            count++;
         }
+        
+        curr->next  = curr->next->next;
+
+
         return head;
     }
 };
