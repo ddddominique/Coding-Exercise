@@ -11,21 +11,21 @@
  */
 class Solution {
     int result = 0;
-    void helper(TreeNode* node, bool lr, int curr_max) {
-        if (!node) {return;}
-        result = max(result, curr_max);
-        if (lr) {
-            helper(node->right, 0, curr_max + 1);
-            helper(node->left, 1, 1);
+    void dfs(TreeNode* root, int indicator, int currlen) {
+        if (!root) {return;}
+        result = max(result, currlen);
+        if (indicator) {
+            dfs(root->right, 0, currlen + 1);
+            dfs(root->left, 1, 1); // same reason here
         } else {
-            helper(node->left, 1, curr_max + 1);
-            helper(node->right, 0, 1);
+            dfs(root->left, 1, currlen + 1);
+            dfs(root->right, 0, 1);
         }
     }
 public:
     int longestZigZag(TreeNode* root) {
-        helper(root->left, 1, 1);
-        helper(root->right, 0, 1);
+        dfs(root->left, 1, 1);
+        dfs(root->right, 0, 1); // start with 1 bc u already made a zigzag
         return result;
     }
 };
