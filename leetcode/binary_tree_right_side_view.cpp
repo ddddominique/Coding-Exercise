@@ -10,29 +10,23 @@
  * };
  */
 class Solution {
-    void helper(TreeNode* root, stack<int>& hold) {
-        if (root->left) {
-
-        }
-    }
 public:
     vector<int> rightSideView(TreeNode* root) {
-
         vector<int> result;
-        if (!root) {return result;}
-        queue<TreeNode*> hold;
-        hold.push(root);
-        while(!hold.empty()) {
-            int size = hold.size();
-            for (int i = 0; i < size; ++i) {
-                TreeNode* node = hold.front();
-                hold.pop();
+        if (!root) return result;
 
-                if (i== size- 1) {result.push_back(node->val);}
-                if (node->left) {hold.push(node->left);}
-                if (node->right) {hold.push(node->right);}
-
+        queue<TreeNode*> q;
+        q.push(root);
+        while (!q.empty()) {
+            int n = q.size();
+            for (int i = 0; i < n; ++i) {
+                            TreeNode* node = q.front();
+            q.pop();
+                if (i == n - 1) result.push_back(node->val);
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
             }
+
         }
         return result;
     }
