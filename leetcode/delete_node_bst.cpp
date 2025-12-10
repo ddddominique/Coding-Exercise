@@ -12,26 +12,28 @@
 class Solution {
 public:
     TreeNode* deleteNode(TreeNode* root, int key) {
-        if (!root) {return root;}
+        if (!root) return nullptr;
 
-        if (root->val < key) {
+        int curr_key = root->val;
+        if (curr_key < key) {
             root->right = deleteNode(root->right, key);
-        } else if (root->val > key) {
+        } else if (curr_key > key) {
             root->left = deleteNode(root->left, key);
-        } else {//root->val = key, we found the target
+        } else { // found it
             if (!root->left) {
-                return root->right;
+                root = root->right;
             } else if (!root->right) {
-                return root->left;
-            } else { //both exists
+                root = root->left;
+            } else {
                 TreeNode* node = root->right;
                 while (node->left) {
                     node = node->left;
                 }
+
                 root->val = node->val;
                 root->right = deleteNode(root->right, root->val);
-            }   
+            }
         }
-     return root; 
+        return root;
     }
 };
