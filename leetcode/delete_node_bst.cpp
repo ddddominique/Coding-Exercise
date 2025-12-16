@@ -13,24 +13,22 @@ class Solution {
 public:
     TreeNode* deleteNode(TreeNode* root, int key) {
         if (!root) return nullptr;
-
-        int curr_key = root->val;
-        if (curr_key < key) {
+        int curr_val = root->val;
+        if (curr_val < key) {
             root->right = deleteNode(root->right, key);
-        } else if (curr_key > key) {
+        } else if (curr_val > key) {
             root->left = deleteNode(root->left, key);
-        } else { // found it
+        } else { //
             if (!root->left) {
                 root = root->right;
             } else if (!root->right) {
                 root = root->left;
             } else {
-                TreeNode* node = root->right;
-                while (node->left) {
-                    node = node->left;
+                TreeNode* hold = root->right;
+                while (hold->left) {
+                    hold = hold->left;
                 }
-
-                root->val = node->val;
+                root->val = hold->val;
                 root->right = deleteNode(root->right, root->val);
             }
         }
