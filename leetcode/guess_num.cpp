@@ -10,14 +10,17 @@
 class Solution {
 public:
     int guessNumber(int n) {
-        int low = 1, high = n;
+        int high = n, low = 1;
         while (low <= high) {
             int mid = low + (high - low) / 2;
-            int g = guess(mid);
-
-            if (g == 0) {return mid;}
-            if (g == 1) {low = mid + 1;}
-            if (g == -1) {high = mid - 1;}
+            int curr_guess = guess(mid);
+            if (curr_guess == -1) {
+                high = mid - 1;
+            } else if (curr_guess == 1) {
+                low = mid + 1;
+            } else {
+                return mid;
+            }
 
         }
         return -1;
