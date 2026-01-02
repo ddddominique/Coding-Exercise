@@ -2,16 +2,15 @@ class Solution {
 public:
     vector<int> successfulPairs(vector<int>& spells, vector<int>& potions, long long success) {
         sort(potions.begin(), potions.end());
-        vector<int> result;
-        int potion_size = potions.size();
-        for (int spell : spells) {
-            auto need = (success + spell - 1) / spell;
+        vector<int> results;
+        for (int spell: spells) {
+            long long need = ceil((double)success/spell);
             auto hold = lower_bound(potions.begin(), potions.end(), need);
-            int r;
-            if (hold == potions.end()) {r = 0;}
-            else {r = potion_size - (hold - potions.begin());}
-            result.push_back(r);
+            int result;
+            if (hold == potions.end()) {result = 0;}
+            else {result = potions.size() - (hold - potions.begin());}
+            results.push_back(result);
         }
-        return result;
+        return results;
     }
 };
