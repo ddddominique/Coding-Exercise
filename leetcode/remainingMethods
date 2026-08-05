@@ -1,0 +1,38 @@
+class Solution {
+    void dfs(vector<int>& visited, unordered_map<int, vector<int>>& graph, int k) {
+        visited[k] = 1;
+        for (int i = 0; i < graph[k].size(); ++i) {
+            if (!visited[graph[k][i]]) {
+                dfs(visited, graph, graph[k][i]);
+            }
+        }
+    }
+public:
+    vector<int> remainingMethods(int n, int k, vector<vector<int>>& invocations) {
+        unordered_map<int, vector<int>> graph;
+        // [a, b], a->b
+        for (auto& pair: invocations) {
+            graph[pair[0]].push_back(pair[1]);
+        }
+        vector<int> visited(n, 0);
+        dfs(visited, graph, k);
+        // visited with 1 are the nodes visited from node k
+        // now need to check if they can be visited from other nodes
+        vector<int> result;
+        for (auto& pair: invocations) {
+            if (!visited[pair[0]] && visited[pair[1]]) {
+                for (int i = 0; i < n; ++i) {
+                    result.push_back(i);
+                }
+                return result;
+            }
+        }
+        for (int i = 0; i < n; ++i) {
+            if (!visited[i]) {
+                result.push_back(i);
+            }
+        }
+        return result;
+
+    }
+};
