@@ -1,0 +1,21 @@
+class Solution {
+    int digits_product(int n) {
+        int result = 1;
+        if (n < 10) return n;
+        while (n >= 10) {
+            result *= n - (n / 10) * 10;
+            n /= 10;
+        }
+        return result * n;
+    }
+public:
+    int smallestNumber(int n, int t) {
+        int result = n;
+        //result >= n
+        //produc of result's digits is dividsble by t;
+        while ((digits_product(result) / t) * t != digits_product(result)) {
+            result++;
+        }
+        return result;
+    }
+};
