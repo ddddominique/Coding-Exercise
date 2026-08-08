@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> validSequence(string word1, string word2) {
+        vector<int> last(word1.size(), -1);
+        int word2_counter = word2.size() - 1;
+        int word1_counter = word1.size() - 1;
+        while (word2_counter >= 0 && word1_counter >= 0) {
+            if (word1[word1_counter] == word2[word2_counter]) {
+                last[word2_counter] = word1_counter;
+                --word2_counter;
+            }
+            --word1_counter;
+        }
+        vector<int> result;
+        bool canSkip = true;
+        int j = 0;
+        for (int i = 0; i < word1.size() && j < word2.size(); ++i) {
+            if (word1[i] == word2[j]) {
+                result.push_back(i);
+                ++j;
+            } else if (canSkip && (j == word2.size() - 1|| i < last[j + 1])) {
+                canSkip = false;
+                result.push_back(i);
+                ++j;
+            }
+        }
+        if (j == word2.size()) {return result;}
+        return {};
+    }
+};
