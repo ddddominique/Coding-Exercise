@@ -1,21 +1,21 @@
 class Solution {
 public:
-    string addBinary(string a, string b) {
-        int length_a = a.length() - 1;
-        int length_b = b.length() - 1;
-        int carryover = 0;
-        string result;
-        while (length_a >= 0 || length_b >= 0 || carryover == 1) {
-            if (length_a >= 0) {
-                carryover += a[length_a--] - '0';
-            }
-            if (length_b >= 0) {
-                carryover += b[length_b--] - '0';
-            }
-            result += carryover % 2 + '0';
-            carryover /= 2;
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>> result;
+        unordered_map<string, vector<int>> map;
+        for (int i = 0; i < strs.size(); ++i) {
+            string s = strs[i];
+            sort(s.begin(), s.end());
+            map[s].push_back(i);
         }
-        reverse(result.begin(), result.end());
+        for (auto& hold : map) {
+            vector<string> mystrings;
+            for (int j : hold.second) {
+                mystrings.push_back(strs[j]);
+            }
+            result.push_back(mystrings);
+        }
         return result;
+
     }
 };

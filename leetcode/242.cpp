@@ -1,14 +1,14 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        if (t.length() != s.length()) return false;
-        unordered_map<char, int> mymap;
+        if (s.length() != t.length()) return false;
+        unordered_map<char, int> hashtable;
         for (char c : s) {
-            mymap[c]++;
+            hashtable[c]++;
         }
         for (char c : t) {
-            if (!mymap[c]) return false;
-            mymap[c]--;
+            if (!hashtable[c]) {return false;}
+            hashtable[c]--;
         }
         return true;
     }
