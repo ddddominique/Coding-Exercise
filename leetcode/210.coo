@@ -1,0 +1,33 @@
+class Solution {
+    bool dfs(vector<vector<int>>& adj, vector<int>& result, vector<int>& visited, int course) {
+        if (visited[course] == 2) return true;
+        if (visited[course] == 1) return false;
+        visited[course] = 2;
+        for (int neighbor : adj[course]) {
+            if (dfs(adj, result, visited, neighbor)) {
+                return true;
+            }
+        }
+        result.push_back(course);
+        visited[course] = 1;
+        return false;
+    }
+public:
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> adj(numCourses);
+        for (vector<int> pre : prerequisites) {
+            int u = pre[0];
+            int v = pre[1];
+            adj[u].push_back(v);
+        }
+        vector<int> result;
+        vector<int> visited(numCourses, 0);
+        // 0 is unvisited; 1 is visited and safe; 2 is meeting a loop
+        for (int i = 0; i < numCourses; ++i) {
+            if (dfs(adj, result, visited, i)) {
+                return {};
+            }
+        }
+        return result;
+    }
+};

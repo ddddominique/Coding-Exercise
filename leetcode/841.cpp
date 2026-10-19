@@ -1,23 +1,23 @@
 class Solution {
-    void dfs(vector<vector<int>>& rooms, int key, vector<bool>& visited) {
-        visited[key] = true;
-        for (int mynewkey : rooms[key]) {
-            if (visited[mynewkey] == 0) {
-                dfs(rooms, mynewkey, visited);
-            }
-        }
-    }
 public:
     bool canVisitAllRooms(vector<vector<int>>& rooms) {
-        vector<bool> visited(rooms.size(), false);
+        int n = rooms.size();
+        vector<int> visited(n, false);
         visited[0] = true;
-        for (int key : rooms[0]) {
-            dfs(rooms, key, visited);
-        }
-        for (bool each : visited) {
-            if (each == false) {
-                return false;
+        queue<int> myq;
+        myq.push(0);
+        while (!myq.empty()) {
+            int curr = myq.front();
+            myq.pop();
+            for (int key : rooms[curr]) {
+                if (visited[key] == false) {
+                    myq.push(key);
+                    visited[key] = true;
+                }
             }
+        }
+        for (bool istrue : visited) {
+            if (istrue == false) return false;
         }
         return true;
     }
