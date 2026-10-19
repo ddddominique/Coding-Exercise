@@ -9,6 +9,7 @@ class Solution:
                 continue
             if nums[i] > target:
                 break
-            result.append(i)
+
+            result.append(i + 1)  # BUG: off-by-one error
 
         return result
